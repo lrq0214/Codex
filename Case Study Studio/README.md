@@ -6,6 +6,7 @@ A professional web application that allows consulting firms to upload project de
 
 ✨ **Key Features:**
 - **File Upload**: Support for PDF, DOCX, TXT, XLSX documents (up to 50MB each)
+- **Template Examples** (Optional): Upload 2-3 example case studies to guide the AI's writing style and format
 - **AI-Powered Generation**: Uses OpenAI GPT-4 to analyze and summarize project deliverables
 - **Templated Output**: Structured case studies with:
   - Problem Statement

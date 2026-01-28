@@ -29,7 +29,7 @@ class CaseStudyGenerator:
             "lessons_learned": "Key insights and learnings"
         }
 
-    def generate(self, project_name, client_name, industry, extracted_content, additional_context=""):
+    def generate(self, project_name, client_name, industry, extracted_content, additional_context="", template_content=None):
         """
         Generate a case study from project content
         
@@ -39,6 +39,7 @@ class CaseStudyGenerator:
             industry: Industry vertical
             extracted_content: Dictionary of extracted file contents
             additional_context: Additional context provided by user
+            template_content: Optional dictionary of template example contents
         
         Returns:
             Dictionary containing the structured case study
@@ -46,6 +47,7 @@ class CaseStudyGenerator:
         
         # Prepare content for LLM
         content_summary = self._prepare_content_summary(extracted_content)
+        template_summary = self._prepare_content_summary(template_content) if template_content else None
         
         # Create prompt for case study generation
         prompt = self._create_prompt(
@@ -53,6 +55,7 @@ class CaseStudyGenerator:
             client_name=client_name,
             industry=industry,
             content_summary=content_summary,
+            template_summary=template_summary,
             additional_context=additional_context
         )
 
@@ -102,8 +105,21 @@ class CaseStudyGenerator:
                 summary += str(content)[:1000]
         return summary
 
-    def _create_prompt(self, project_name, client_name, industry, content_summary, additional_context):
+    def _create_prompt(self, project_name, client_name, industry, content_summary, additional_context, template_summary=None):
         """Create the prompt for case study generation"""
+        
+        # Build template instruction if templates were provided
+        template_instruction = ""
+        if template_summary:
+            template_instruction = f"""
+        
+        TEMPLATE EXAMPLES PROVIDED:
+        Review these example case studies as reference for format, style, and structure:
+        {template_summary}
+        
+        Use these templates as guides for the writing style, section depth, and overall presentation format.
+        However, focus primarily on the PROJECT DELIVERABLES above - the templates are for style reference only."""
+        
         prompt = f"""
         Generate a one-page case study for the following project:
         
@@ -114,7 +130,7 @@ class CaseStudyGenerator:
         Additional Context from User: {additional_context or 'None provided'}
         
         Project Deliverables and Documentation:
-        {content_summary}
+        {content_summary}{template_instruction}
         
         Please structure the case study with the following sections:
         

@@ -12,6 +12,7 @@ const LIST_ENDPOINT = '/case-studies';
 // State Management
 const state = {
     uploadedFiles: [],
+    templateFiles: [],
     currentCaseStudy: null,
     selectedTab: 'upload'
 };
@@ -21,6 +22,9 @@ const elements = {
     uploadArea: document.getElementById('uploadArea'),
     fileInput: document.getElementById('fileInput'),
     fileList: document.getElementById('fileList'),
+    templateUploadArea: document.getElementById('templateUploadArea'),
+    templateFileInput: document.getElementById('templateFileInput'),
+    templateFileList: document.getElementById('templateFileList'),
     projectForm: document.getElementById('projectForm'),
     generateBtn: document.getElementById('generateBtn'),
     loadingSpinner: document.getElementById('loadingSpinner'),
@@ -42,9 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =============================================
-// EVENT LISTENERS
-// =============================================
-
 function initializeEventListeners() {
     // File upload events
     elements.uploadArea.addEventListener('click', () => {
@@ -53,6 +54,20 @@ function initializeEventListeners() {
 
     elements.fileInput.addEventListener('change', handleFileInputChange);
 
+    elements.uploadArea.addEventListener('dragover', handleDragOver);
+    elements.uploadArea.addEventListener('dragleave', handleDragLeave);
+    elements.uploadArea.addEventListener('drop', handleDrop);
+
+    // Template file upload events
+    elements.templateUploadArea.addEventListener('click', () => {
+        elements.templateFileInput.click();
+    });
+
+    elements.templateFileInput.addEventListener('change', handleTemplateFileInputChange);
+
+    elements.templateUploadArea.addEventListener('dragover', handleTemplateDragOver);
+    elements.templateUploadArea.addEventListener('dragleave', handleTemplateDragLeave);
+    elements.templateUploadArea.addEventListener('drop', handleTemplateDrop);
     elements.uploadArea.addEventListener('dragover', handleDragOver);
     elements.uploadArea.addEventListener('dragleave', handleDragLeave);
     elements.uploadArea.addEventListener('drop', handleDrop);
@@ -161,17 +176,6 @@ function updateGenerateButtonState() {
 }
 
 // =============================================
-// FORM VALIDATION
-// =============================================
-
-document.getElementById('projectName').addEventListener('change', updateGenerateButtonState);
-document.getElementById('clientName').addEventListener('change', updateGenerateButtonState);
-document.getElementById('industry').addEventListener('change', updateGenerateButtonState);
-
-// =============================================
-// CASE STUDY GENERATION
-// =============================================
-
 async function handleGenerateCaseStudy() {
     // Validate form
     const projectName = document.getElementById('projectName').value.trim();
@@ -190,10 +194,13 @@ async function handleGenerateCaseStudy() {
         elements.generateBtn.disabled = true;
         showStatus('Uploading files and generating case study...', 'info');
 
-        // Step 1: Upload files
+        // Step 1: Upload files (deliverables and templates)
         const formData = new FormData();
         state.uploadedFiles.forEach(file => {
             formData.append('files', file);
+        });
+        state.templateFiles.forEach(file => {
+            formData.append('template_files', file);
         });
         formData.append('projectName', projectName);
         formData.append('clientName', clientName);
@@ -209,18 +216,17 @@ async function handleGenerateCaseStudy() {
         }
 
         const uploadData = await uploadResponse.json();
-        const uploadedFiles = uploadData.uploaded_files || [];
-
-        // Step 2: Generate case study
         showStatus('Generating case study from uploaded files...', 'info');
 
+        // Step 2: Generate case study
         const generateResponse = await fetch(`${API_BASE_URL}${GENERATE_ENDPOINT}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                files: uploadedFiles,
+                files: uploadData.uploaded_files,
+                template_files: uploadData.template_files || [],
                 projectName: projectName,
                 clientName: clientName,
                 industry: industry,
@@ -332,16 +338,18 @@ function handleSave() {
         showStatus('Case study saved to history!', 'success');
         loadCaseStudyHistory();
     } catch (error) {
-        showStatus(`Save failed: ${error.message}`, 'error');
-    }
-}
-
 function handleNewCaseStudy() {
     // Reset form
     document.getElementById('projectForm').reset();
     state.uploadedFiles = [];
+    state.templateFiles = [];
     state.currentCaseStudy = null;
     updateFileList();
+    updateTemplateFileList();
+    elements.previewSection.style.display = 'none';
+    elements.statusMessage.classList.remove('show');
+    updateGenerateButtonState();
+}   updateFileList();
     elements.previewSection.style.display = 'none';
     elements.statusMessage.classList.remove('show');
     updateGenerateButtonState();

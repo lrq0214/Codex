@@ -37,7 +37,8 @@ Open in browser: `http://localhost:8000`
 3. **Test the Application**
    - Navigate to frontend in browser
    - Enter sample project information
-   - Upload a test document
+   - Upload a test document (project deliverables)
+   - Optionally upload template examples (case studies to match style)
    - Click "Generate Case Study"
    - Preview and download the result
 
@@ -45,11 +46,17 @@ Open in browser: `http://localhost:8000`
 
 ### 📂 Example Usage
 
-**Sample Project Upload:**
+**Option 1: Generate from Project Files Only**
 - Project Name: "Digital Transformation at TechCorp"
 - Client Name: "TechCorp Industries"
 - Industry: "Technology"
 - Files: Project proposal (PDF), meeting notes (DOCX), financial impact (XLSX)
+
+**Option 2: Generate Using Template Examples**
+- Same project information as above
+- Project Files: Project proposal, meeting notes, financial data
+- Template Examples: 2-3 example case studies in PDF/DOCX format that show desired style
+- Result: Case study matches the format and style of your template examples
 
 **Expected Output:**
 A professional one-page Word document with:
@@ -59,6 +66,27 @@ A professional one-page Word document with:
 - Business impact
 - Implementation timeline
 - Lessons learned
+
+---
+
+### 📎 Template Examples (Optional Feature)
+
+**What are Template Examples?**
+Upload 2-3 example case studies in PDF or DOCX format to guide the AI's writing style, format, and structure. The AI will use these as style references while generating your case study based on actual project deliverables.
+
+**How to Use:**
+1. Prepare 1-3 example case studies in PDF or DOCX format
+2. In Step 2b "Upload Template Examples", drag-drop or browse your examples
+3. Upload project deliverables as normal in Step 2a
+4. Click "Generate Case Study"
+5. The AI will follow the style/format of your templates while focusing on your project content
+
+**Benefits:**
+✅ Consistent writing style across case studies
+✅ Matches your brand's case study format
+✅ Faster generation with less post-editing needed
+✅ Professional appearance aligned with examples
+✅ Optional - works great with or without templates
 
 ---
 
@@ -91,12 +119,14 @@ A professional one-page Word document with:
 
 ### 📊 Supported Formats
 
-| File Type | Extensions | Use Case |
-|-----------|-----------|----------|
-| PDF | .pdf | Reports, presentations |
-| Word | .docx, .doc | Proposals, documentation |
-| Excel | .xlsx, .xls | Data, metrics, budgets |
-| Text | .txt | Notes, transcripts |
+| File Type | Extensions | Use Case | Can Use as Template? |
+|-----------|-----------|----------|-----|
+| PDF | .pdf | Reports, presentations, case studies | ✅ Yes |
+| Word | .docx, .doc | Proposals, documentation, case studies | ✅ Yes (DOCX) |
+| Excel | .xlsx, .xls | Data, metrics, budgets | ❌ No |
+| Text | .txt | Notes, transcripts | ❌ No |
+
+**Note:** Template examples should be PDF or DOCX files. Excel and text files are supported only as project deliverables.
 
 ---
 

@@ -53,7 +53,7 @@ def health_check():
 @app.route('/api/upload', methods=['POST'])
 def upload_files():
     """
-    Upload consulting project deliverables
+    Upload consulting project deliverables and optional template examples
     Accepts multiple file uploads
     """
     try:
@@ -61,6 +61,8 @@ def upload_files():
             return jsonify({'error': 'No files provided'}), 400
 
         files = request.files.getlist('files')
+        template_files = request.files.getlist('template_files')
+        
         if not files or len(files) == 0:
             return jsonify({'error': 'No files selected'}), 400
 
@@ -70,8 +72,10 @@ def upload_files():
         industry = request.form.get('industry', 'General')
 
         uploaded_files = []
+        uploaded_templates = []
         errors = []
 
+        # Process project deliverable files
         for file in files:
             if file.filename == '':
                 errors.append('Empty filename')
@@ -92,10 +96,37 @@ def upload_files():
                     'original_name': file.filename,
                     'saved_name': unique_filename,
                     'filepath': filepath,
-                    'size': os.path.getsize(filepath)
+                    'size': os.path.getsize(filepath),
+                    'type': 'deliverable'
                 })
             except Exception as e:
                 errors.append(f'{file.filename}: {str(e)}')
+
+        # Process template files
+        for file in template_files:
+            if file.filename == '':
+                continue
+
+            if not allowed_file(file.filename):
+                errors.append(f'{file.filename}: Invalid template file type')
+                continue
+
+            try:
+                filename = secure_filename(file.filename)
+                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S_')
+                unique_filename = 'template_' + timestamp + filename
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+                
+                file.save(filepath)
+                uploaded_templates.append({
+                    'original_name': file.filename,
+                    'saved_name': unique_filename,
+                    'filepath': filepath,
+                    'size': os.path.getsize(filepath),
+                    'type': 'template'
+                })
+            except Exception as e:
+                errors.append(f'{file.filename} (template): {str(e)}')
 
         if not uploaded_files:
             return jsonify({'error': 'No files uploaded successfully', 'details': errors}), 400
@@ -103,6 +134,8 @@ def upload_files():
         return jsonify({
             'success': True,
             'uploaded_files': uploaded_files,
+            'template_files': uploaded_templates,
+            'total_files': len(uploaded_files) + len(uploaded_templates),
             'errors': errors,
             'metadata': {
                 'project_name': project_name,
@@ -118,7 +151,7 @@ def upload_files():
 @app.route('/api/generate-case-study', methods=['POST'])
 def generate_case_study():
     """
-    Generate a templated case study from uploaded files
+    Generate a templated case study from uploaded files and optional template references
     """
     try:
         data = request.get_json()
@@ -127,6 +160,8 @@ def generate_case_study():
             return jsonify({'error': 'No files specified for processing'}), 400
 
         files = data['files']
+        template_files = data.get('template_files', [])
+        
         if not isinstance(files, list) or len(files) == 0:
             return jsonify({'error': 'Files must be a non-empty array'}), 400
 
@@ -136,7 +171,7 @@ def generate_case_study():
         industry = data.get('industry', 'General')
         additional_context = data.get('additionalContext', '')
 
-        # Extract content from files
+        # Extract content from project deliverable files
         extracted_content = {}
         for file_info in files:
             filepath = file_info.get('filepath')
@@ -147,12 +182,24 @@ def generate_case_study():
                 except Exception as e:
                     extracted_content[file_info.get('original_name')] = f"Error processing: {str(e)}"
 
-        # Generate case study
+        # Extract content from template files (for reference)
+        template_content = {}
+        for file_info in template_files:
+            filepath = file_info.get('filepath')
+            if filepath and os.path.exists(filepath):
+                try:
+                    content = processor.extract_content(filepath)
+                    template_content[file_info.get('original_name')] = content
+                except Exception as e:
+                    template_content[file_info.get('original_name')] = f"Error processing: {str(e)}"
+
+        # Generate case study with template reference
         case_study = generator.generate(
             project_name=project_name,
             client_name=client_name,
             industry=industry,
             extracted_content=extracted_content,
+            template_content=template_content if template_content else None,
             additional_context=additional_context
         )
 

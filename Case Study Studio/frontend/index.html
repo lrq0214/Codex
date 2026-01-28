@@ -80,6 +80,21 @@
                 </section>
 
                 <section class="upload-section">
+                    <h2>Step 2b: Upload Template Examples (Optional)</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        Upload example case studies or templates to reference for style and format
+                    </p>
+                    <div class="upload-area" id="templateUploadArea">
+                        <div class="upload-icon">📎</div>
+                        <h3>Drop template files here or click to upload</h3>
+                        <p>Supported formats: PDF, DOCX, TXT (Max 50MB per file)</p>
+                        <input type="file" id="templateFileInput" multiple 
+                               accept=".pdf,.docx,.txt" hidden>
+                    </div>
+                    <div id="templateFileList" class="file-list"></div>
+                </section>
+
+                <section class="upload-section">
                     <h2>Step 3: Generate Case Study</h2>
                     <button id="generateBtn" class="btn btn-primary" disabled>
                         Generate Case Study
