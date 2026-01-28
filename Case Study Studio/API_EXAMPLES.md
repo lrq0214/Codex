@@ -1,4 +1,4 @@
-# Case Study Generator - API Examples
+# Case Study Studio - API Examples
 
 ## 1. Health Check
 

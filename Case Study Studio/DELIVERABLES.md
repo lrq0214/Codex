@@ -1,4 +1,4 @@
-# 📦 DELIVERABLES.md - Case Study Generator Application
+# 📦 DELIVERABLES.md - Case Study Studio Application
 
 ## 🎯 Project Completion Status
 

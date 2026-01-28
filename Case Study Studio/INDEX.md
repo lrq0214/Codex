@@ -1,4 +1,4 @@
-# 📚 Case Study Generator - Documentation Index
+# 📚 Case Study Studio - Documentation Index
 
 ## Quick Navigation
 

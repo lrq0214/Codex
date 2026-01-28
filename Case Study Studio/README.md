@@ -1,4 +1,4 @@
-# Case Study Generator Application
+# Case Study Studio Application
 
 A professional web application that allows consulting firms to upload project deliverables and automatically generate templated one-page case studies using AI.
 

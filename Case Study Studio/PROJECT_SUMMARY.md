@@ -1,4 +1,4 @@
-# 🎯 Case Study Generator - Complete Project Summary
+# 🎯 Case Study Studio - Complete Project Summary
 
 ## Overview
 

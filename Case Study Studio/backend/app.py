@@ -1,5 +1,5 @@
 """
-Case Study Generator Application
+Case Study Studio Application
 Allows users to upload consulting project deliverables and generate templated case studies
 """
 

@@ -1,4 +1,4 @@
-## Case Study Generator - Quick Start Guide
+## Case Study Studio - Quick Start Guide
 
 ### 🚀 Start the Application (2 Minutes)
 

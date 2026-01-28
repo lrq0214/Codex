@@ -1,5 +1,5 @@
 /* =============================================
-   CASE STUDY GENERATOR - JAVASCRIPT
+   CASE STUDY STUDIO - JAVASCRIPT
    ============================================= */
 
 // Configuration

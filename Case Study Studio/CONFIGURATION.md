@@ -1,4 +1,4 @@
-# Case Study Generator - Configuration Guide
+# Case Study Studio - Configuration Guide
 
 ## Environment Setup
 
