@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation Summarizer - Executive Summary Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📊 Presentation Summarizer</h1>
+                <p class="subtitle">Transform your presentations into powerful executive summaries</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Status Alert -->
+            <div id="status-alert" class="alert alert-hidden"></div>
+
+            <!-- Step 1: Upload -->
+            <section class="step" id="step-upload">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <h2>Upload Your Presentation</h2>
+                </div>
+                <div class="step-content">
+                    <div class="upload-area" id="upload-area">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="upload-text">Click to upload or drag and drop</p>
+                        <p class="upload-hint">.pptx files up to 50MB</p>
+                        <input type="file" id="file-input" accept=".pptx" hidden>
+                    </div>
+                    <div id="file-preview" class="file-preview hidden">
+                        <div class="file-info">
+                            <span id="file-name" class="file-name"></span>
+                            <span id="slide-count" class="slide-count"></span>
+                        </div>
+                        <button class="btn btn-secondary" id="change-file-btn">Change File</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Configure -->
+            <section class="step" id="step-configure" style="display: none;">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <h2>Configure Summary</h2>
+                </div>
+                <div class="step-content">
+                    <div class="form-group">
+                        <label for="max-length">Summary Length (words)</label>
+                        <div class="slider-container">
+                            <input type="range" id="max-length" min="200" max="800" value="400" class="slider">
+                            <span id="length-display" class="length-display">400</span>
+                        </div>
+                        <p class="form-hint">More words = more detailed summary</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model">AI Model</label>
+                        <select id="model" class="select">
+                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Fast & Cost-effective)</option>
+                            <option value="gpt-4">GPT-4 (Better Quality)</option>
+                        </select>
+                        <p class="form-hint">GPT-4 produces better quality but is slower and more expensive</p>
+                    </div>
+
+                    <button class="btn btn-primary" id="generate-btn">Generate Summary</button>
+                </div>
+            </section>
+
+            <!-- Step 3: Review & Download -->
+            <section class="step" id="step-review" style="display: none;">
+                <div class="step-header">
+                    <span class="step-number">3</span>
+                    <h2>Review & Download</h2>
+                </div>
+                <div class="step-content">
+                    <div class="summary-preview">
+                        <div class="preview-title">
+                            <h3>Slide Title</h3>
+                            <p id="summary-title" class="title-preview"></p>
+                        </div>
+                        <div class="preview-content">
+                            <h3>Summary Content</h3>
+                            <p id="summary-content" class="content-preview"></p>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" id="edit-btn">← Back to Configure</button>
+                        <button class="btn btn-success" id="download-btn">⬇️ Download Summary Slide</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Spinner -->
+            <div id="loading-overlay" class="loading-overlay hidden">
+                <div class="spinner"></div>
+                <p id="loading-text">Processing your presentation...</p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by OpenAI's GPT Models | Upload files securely and locally</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
