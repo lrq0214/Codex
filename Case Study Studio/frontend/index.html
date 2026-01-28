@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study Generator - Professional Consulting Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📋 Case Study Generator</h1>
+                <p>Transform your consulting project deliverables into professional one-page case studies</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="upload">Upload & Generate</button>
+                <button class="tab-btn" data-tab="history">Case Study History</button>
+                <button class="tab-btn" data-tab="templates">Templates & Examples</button>
+            </div>
+
+            <!-- Upload & Generate Tab -->
+            <div id="upload" class="tab-content active">
+                <section class="upload-section">
+                    <h2>Step 1: Project Information</h2>
+                    <form id="projectForm" class="form-group">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="projectName">Project Name *</label>
+                                <input type="text" id="projectName" name="projectName" 
+                                       placeholder="e.g., Digital Transformation Initiative" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="clientName">Client Name *</label>
+                                <input type="text" id="clientName" name="clientName" 
+                                       placeholder="e.g., Acme Corporation" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="industry">Industry *</label>
+                                <select id="industry" name="industry" required>
+                                    <option value="">Select an industry</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Retail">Retail</option>
+                                    <option value="Manufacturing">Manufacturing</option>
+                                    <option value="Energy">Energy</option>
+                                    <option value="Telecommunications">Telecommunications</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="additionalContext">Additional Context</label>
+                                <textarea id="additionalContext" name="additionalContext" 
+                                          placeholder="Any additional context or highlights about the project..."
+                                          rows="3"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="upload-section">
+                    <h2>Step 2: Upload Project Deliverables</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>Drop files here or click to upload</h3>
+                        <p>Supported formats: PDF, DOCX, TXT, XLSX (Max 50MB per file)</p>
+                        <input type="file" id="fileInput" multiple 
+                               accept=".pdf,.docx,.txt,.xlsx,.xls" hidden>
+                    </div>
+                    <div id="fileList" class="file-list"></div>
+                </section>
+
+                <section class="upload-section">
+                    <h2>Step 3: Generate Case Study</h2>
+                    <button id="generateBtn" class="btn btn-primary" disabled>
+                        Generate Case Study
+                    </button>
+                    <div id="loadingSpinner" class="spinner hidden"></div>
+                    <div id="statusMessage" class="status-message"></div>
+                </section>
+
+                <!-- Preview Section -->
+                <section class="preview-section" id="previewSection" style="display: none;">
+                    <h2>Generated Case Study Preview</h2>
+                    <div id="caseStudyPreview" class="case-study-preview"></div>
+                    <div class="button-group">
+                        <button id="downloadBtn" class="btn btn-success">Download as DOCX</button>
+                        <button id="saveBtn" class="btn btn-info">Save to History</button>
+                        <button id="newCaseStudyBtn" class="btn btn-secondary">Create Another</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history" class="tab-content">
+                <section class="upload-section">
+                    <h2>Previously Generated Case Studies</h2>
+                    <div id="caseStudyList" class="case-study-list"></div>
+                </section>
+            </div>
+
+            <!-- Templates Tab -->
+            <div id="templates" class="tab-content">
+                <section class="upload-section">
+                    <h2>Case Study Templates</h2>
+                    <div class="templates-grid">
+                        <div class="template-card">
+                            <h3>Technology Project</h3>
+                            <p>Template for software development, cloud migration, or digital transformation projects</p>
+                            <button class="btn btn-outline">View Template</button>
+                        </div>
+                        <div class="template-card">
+                            <h3>Process Optimization</h3>
+                            <p>Template for operational efficiency, cost reduction, or process redesign initiatives</p>
+                            <button class="btn btn-outline">View Template</button>
+                        </div>
+                        <div class="template-card">
+                            <h3>Business Strategy</h3>
+                            <p>Template for market expansion, organizational restructuring, or strategic planning</p>
+                            <button class="btn btn-outline">View Template</button>
+                        </div>
+                        <div class="template-card">
+                            <h3>Change Management</h3>
+                            <p>Template for change initiatives, training programs, or culture transformation</p>
+                            <button class="btn btn-outline">View Template</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Case Study Generator | Powered by AI</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

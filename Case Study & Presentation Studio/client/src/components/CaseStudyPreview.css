@@ -1,0 +1,206 @@
+.preview-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.preview-header h2 {
+  font-size: 1.8em;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  font-size: 1.8em;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.case-study-document {
+  background: white;
+  border-radius: 12px;
+  padding: 50px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.document-header {
+  text-align: center;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.document-header h1 {
+  font-size: 2em;
+  color: #667eea;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.document-info {
+  text-align: center;
+}
+
+.project-title {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.document-meta {
+  font-size: 0.95em;
+  color: #666;
+  margin: 4px 0;
+}
+
+.case-study-section {
+  margin-bottom: 25px;
+}
+
+.case-study-section h2 {
+  font-size: 1.2em;
+  color: #667eea;
+  margin-bottom: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.case-study-section p {
+  color: #555;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.takeaways-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.takeaways-list li {
+  padding: 10px 0 10px 25px;
+  position: relative;
+  color: #555;
+}
+
+.takeaways-list li:before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.document-footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  margin-top: 30px;
+  color: #999;
+  font-size: 0.9em;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.action-buttons button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+}
+
+.export-btn {
+  background: #667eea;
+  color: white;
+}
+
+.export-btn:hover {
+  background: #764ba2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.new-case-btn {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.new-case-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+@media (max-width: 768px) {
+  .case-study-document {
+    padding: 30px 20px;
+  }
+
+  .document-header h1 {
+    font-size: 1.5em;
+  }
+
+  .project-title {
+    font-size: 1.1em;
+  }
+
+  .case-study-section h2 {
+    font-size: 1.05em;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}
+
+/* Print styles for better PDF appearance */
+@media print {
+  .preview-header,
+  .action-buttons {
+    display: none;
+  }
+
+  .case-study-document {
+    box-shadow: none;
+    padding: 0;
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "Case Study Generator",
+  "version": "1.0.0",
+  "description": "Professional consulting case study generator powered by AI",
+  "author": "Consulting AI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lrq0214/Codex.git"
+  },
+  "backend": {
+    "language": "Python",
+    "framework": "Flask",
+    "python_version": "3.8+",
+    "requirements": [
+      "Flask==2.3.3",
+      "Flask-CORS==4.0.0",
+      "python-dotenv==1.0.0",
+      "openai==1.3.0",
+      "PyPDF2==3.0.1",
+      "python-docx==0.8.11",
+      "requests==2.31.0"
+    ]
+  },
+  "frontend": {
+    "language": "JavaScript",
+    "framework": "Vanilla JS",
+    "technologies": [
+      "HTML5",
+      "CSS3",
+      "JavaScript (ES6+)",
+      "Local Storage API"
+    ]
+  },
+  "features": [
+    "Multi-file upload (PDF, DOCX, TXT, XLSX)",
+    "AI-powered case study generation using GPT-4",
+    "Professional DOCX output",
+    "Case study history and management",
+    "Responsive design for all devices",
+    "Real-time preview",
+    "Local storage for case studies"
+  ],
+  "api_endpoints": {
+    "health": "GET /health",
+    "upload": "POST /api/upload",
+    "generate": "POST /api/generate-case-study",
+    "download": "GET /api/download/<filename>",
+    "list": "GET /api/case-studies"
+  },
+  "folders": {
+    "backend": {
+      "app.py": "Flask API server",
+      "case_study_generator.py": "AI case study generation logic",
+      "file_processor.py": "File parsing and content extraction",
+      "requirements.txt": "Python dependencies",
+      ".env.example": "Environment variables template",
+      "uploads": "Directory for uploaded files",
+      "outputs": "Directory for generated case studies"
+    },
+    "frontend": {
+      "index.html": "Main application interface",
+      "styles.css": "Responsive styling",
+      "script.js": "Client-side logic"
+    }
+  },
+  "usage": {
+    "step1": "Upload consulting project deliverables",
+    "step2": "Enter project metadata (name, client, industry)",
+    "step3": "AI analyzes documents and generates case study",
+    "step4": "Download or save to history"
+  },
+  "case_study_sections": [
+    "Problem Statement",
+    "Solution Approach",
+    "Key Metrics",
+    "Impact Summary",
+    "Implementation Details",
+    "Lessons Learned"
+  ],
+  "supported_formats": {
+    "pdf": "Project reports and presentations",
+    "docx": "Proposals and documentation",
+    "xlsx": "Data, metrics, and financials",
+    "txt": "Notes and transcripts"
+  },
+  "constraints": {
+    "max_file_size_mb": 50,
+    "max_upload_files": 10,
+    "supported_extensions": [
+      "pdf",
+      "docx",
+      "txt",
+      "xlsx",
+      "xls"
+    ]
+  }
+}
